@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ImperUni</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    color:#fff;
+    background:url("istockphoto-474550066-2048x2048.webp") no-repeat center center fixed;
+    background-size:cover;
+}
+
+/* EFECTO OSCURO GENERAL */
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.55);
+    z-index:-1;
+}
+
+/* MENÚ GLASS */
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    padding:10px;
+    background:rgba(29, 33, 240, 0.4);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    padding:15px 18px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+nav a:hover{
+    background:rgba(246, 17, 17, 0.929);
+    border-radius:10px;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero-contenido{
+    background:rgba(0,0,0,.4);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+}
+
+.logo{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    margin-bottom:20px;
+    background:white;
+    padding:10px;
+}
+
+.hero h1{
+    font-size:55px;
+}
+
+.hero p{
+    font-size:20px;
+}
+
+/* SECCIONES GLASS */
+section{
+    padding:100px 10%;
+}
+
+.titulo{
+    text-align:center;
+    font-size:35px;
+    margin-bottom:30px;
+    color:#184cf8;
+}
+
+/* CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:rgba(236, 9, 9, 0.906);
+    backdrop-filter:blur(12px);
+    padding:25px;
+    border-radius:20px;
+    border:1px solid rgba(28, 74, 240, 0.867);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    background:rgba(255,255,255,.18);
+}
+
+/* OBJETIVOS */
+.objetivos{
+    background:rgba(0,0,0,.2);
+}
+
+/* CARRUSEL */
+.carrusel{
+    position:relative;
+    max-width:900px;
+    margin:auto;
+}
+
+.slide{
+    width:100%;
+    height:450px;
+    object-fit:cover;
+    border-radius:20px;
+    display:none;
+}
+
+.slide.activo{
+    display:block;
+}
+
+.anterior,.siguiente{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(0,0,0,.5);
+    border:none;
+    color:white;
+    padding:12px;
+    font-size:22px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.anterior{left:10px;}
+.siguiente{right:10px;}
+
+/* IMPACTO */
+.impacto{
+    text-align:center;
+}
+
+.numeros{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+    margin-top:20px;
+}
+
+.numero{
+    background:rgba(255,255,255,.1);
+    padding:20px;
+    border-radius:15px;
+    width:200px;
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.2);
+}
+
+.numero h3{
+    font-size:35px;
+    color:#a5ffb0;
+}
+
+/* FOOTER */
+footer{
+    background:rgba(0,0,0,.5);
+    text-align:center;
+    padding:40px;
+    backdrop-filter:blur(10px);
+}
+
+.redes img{
+    width:50px;
+    height:50px;
+    margin:10px;
+    border-radius:50%;
+    background:white;
+    padding:5px;
+    transition:.3s;
+}
+
+.redes img:hover{
+    transform:scale(1.1);
+}
+
+/* UBICACIÓN */
+.ubicacion{
+    margin-top:20px;
+    background:rgba(255,255,255,.1);
+    padding:20px;
+    border-radius:15px;
+    backdrop-filter:blur(10px);
+}
+
+.btn-mapa{
+    display:inline-block;
+    margin-top:10px;
+    padding:10px 20px;
+    background:white;
+    color:#145002;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.btn-mapa:hover{
+    background:#c8e6c9;
+}
+
+/* RESPONSIVO */
+@media(max-width:768px){
+
+.hero h1{font-size:35px;}
+.hero p{font-size:16px;}
+.slide{height:280px;}
+
+}
+
+/*==========================
+        FORMULARIO
+===========================*/
+
+#contacto{
+
+display:flex;
+justify-content:center;
+align-items:center;
+padding:100px 20px;
+
+}
+
+.form-contenedor{
+
+width:100%;
+max-width:700px;
+
+padding:45px;
+
+background:rgba(255,255,255,.12);
+
+backdrop-filter:blur(18px);
+
+border-radius:25px;
+
+border:1px solid rgba(255,255,255,.25);
+
+box-shadow:0 20px 45px rgba(0,0,0,.35);
+
+}
+
+.form-header{
+
+text-align:center;
+
+margin-bottom:40px;
+
+}
+
+.form-header h2{
+
+font-size:40px;
+
+margin-bottom:10px;
+
+color:white;
+
+}
+
+.form-header p{
+
+color:#d8ffd8;
+
+font-size:17px;
+
+}
+
+form{
+
+display:flex;
+
+flex-direction:column;
+
+gap:25px;
+
+}
+
+.grupo{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.grupo label{
+
+margin-bottom:8px;
+
+font-size:16px;
+
+font-weight:bold;
+
+color:white;
+
+}
+
+.grupo input,
+.grupo textarea{
+
+width:100%;
+
+padding:16px;
+
+font-size:16px;
+
+color:white;
+
+background:rgba(255,255,255,.10);
+
+border:1px solid rgba(255,255,255,.20);
+
+border-radius:15px;
+
+outline:none;
+
+transition:.35s;
+
+}
+
+.grupo input::placeholder,
+.grupo textarea::placeholder{
+
+color:#d8d8d8;
+
+}
+
+.grupo input:focus,
+.grupo textarea:focus{
+
+border:1px solid #9cff9c;
+
+background:rgba(255,255,255,.18);
+
+box-shadow:0 0 15px rgba(0,255,120,.35);
+
+}
+
+.grupo textarea{
+
+resize:none;
+
+min-height:170px;
+
+}
+
+form button{
+
+margin-top:10px;
+
+padding:18px;
+
+border:none;
+
+border-radius:15px;
+
+background:linear-gradient(135deg,#1565c0,#42a5f5);
+
+color:white;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.35s;
+
+}
+
+form button:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 15px 30px rgba(33,150,243,.45);
+
+background:linear-gradient(135deg,#1976d2,#64b5f6);
+
+}
+
+#ubicacion{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:100px 20px;
+}
+
+#ubicacion h2{
+    font-size:40px;
+    margin-bottom:10px;
+    color:white;
+}
+
+#ubicacion p{
+    font-size:20px;
+    margin-bottom:25px;
+    color:white;
+}
+
+#ubicacion iframe{
+    width:80%;
+    max-width:900px;
+    height:500px;
+    border:none;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.4);
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#proyecto">¿Quienes somos?</a>
+    <a href="#objetivos">Servicios</a>
+    <a href="#galeria">Carrusel</a>
+    <a href="#impacto">Ubicacion</a>
+    <a href="#contacto">Contacto</a>
+</nav>
+
+<section class="hero" id="inicio">
+<div class="hero-contenido">
+
+<img src="C:\Users\shilo\OneDrive\Documentos\Codigo_de_mi_proyecto\descarga (5).jpg" class="logo">
+
+<h1>Refaccionaria Shilo's</h1>
+<p>Te damos hasta 1 mes de garantia en cualquier producto adquirido</p>
+
+</div>
+</section>
+
+<div class="cards">
+<div class="card"><h3>¿Quienes somos?</h3><p>Somos una empresa que ofrese refacciones electricas y pilas, somos una empresa que lleva muchos años de experiencia, lo hacemos porque es el trabajo que es mas pagado y somos onestos para que puedan comprar piezas con confianza pues como empeso este negocio fue que mi papá trabajaba en la ciudad de México y el veia que si entrava mucho dinero de ganancia </p></div>
+<div class="card"><h3>Mision</h3><p>Lo que buscamos es hacernos un poco mas conocidos en el Estado de México, trabajamos con barios repartidores de varios productos de buena calidad, ayuda a los peatones que utilizan cualquier automovil</p></div>
+<div class="card"><h3>Vision</h3><p>En 3 años visualizamos que ya nos conpocen minimo hasta queretaro, pues que podemos cubrir las nacesidades de las personas, pues ya reconocidos con una empresa grande y con buena sona ya establecidos </p></div>
+</div>
+</section>
+
+<section class="objetivos" id="objetivos">
+<h2 class="titulo">Cervicios</h2>
+
+<div class="cards">
+<div class="card"><h3>Refacciones</h3><p>Tenemos den cualquier tipo de refaccion desde partes electricas hasta partes no electricas</p></div>
+<div class="card"><h3>Pilas</h3><p>Tenemos de todo tipo de pilas y de todo tipo de marcas </p></div>
+<div class="card"><h3>Aceites</h3><p>Tenemos de cualquier marca de aceite </p></div>
+</div>
+</section>
+
+<section id="galeria">
+<h2 class="titulo">Galería</h2>
+
+<div class="carrusel">
+<img src="C:\Users\shilo\OneDrive\Documentos\Codigo_de_mi_proyecto\descarga (3).jpg" class="slide activo">
+<img src="C:\Users\shilo\OneDrive\Documentos\Codigo_de_mi_proyecto\bateria-automotriz-lth-l42-500.jpg" class="slide">
+<img src="C:\Users\shilo\OneDrive\Documentos\Codigo_de_mi_proyecto\descarga (1).jpg" class="slide">
+<img src="C:\Users\shilo\OneDrive\Documentos\Codigo_de_mi_proyecto\images (4).jpg" class="slide">
+
+<button class="anterior">&#10094;</button>
+<button class="siguiente">&#10095;</button>
+</div>
+</section>
+
+<section id="ubicacion" class="reveal">
+    <h2>¿En donde nos puedes encontrar?</h2>
+    <p>Canalejas Jilotepec, Estado de México</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!4v1783039824643!6m8!1m7!1svzC6jtCyF9-DcCg2DM2kxQ!2m2!1d19.97381619660216!2d-99.60162196298148!3f222.2998791556107!4f0.41434897735463494!5f0.4000000000000002" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></iframe>
+  </section>
+
+  <section id="contacto" class="reveal">
+    <form action="http://localhost:3000/guardar" method="POST">
+      <section id="contacto">
+
+    <div class="contenedor-formulario">
+
+       <section id="contacto">
+
+<div class="form-contenedor">
+
+<div class="form-header">
+<h2>Contáctanos</h2>
+<p>Solicita información sobre nuestras refacciones o déjanos un mensaje.</p>
+</div>
+
+<form action="http://localhost:3000/guardar" method="POST">
+
+<div class="grupo">
+<label for="nombre">Nombre completo</label>
+<input
+type="text"
+id="nombre"
+name="nombre"
+placeholder="Ej. Juan Pérez"
+required>
+</div>
+
+<div class="grupo">
+<label for="correo">Correo electrónico</label>
+<input
+type="email"
+id="correo"
+name="correo"
+placeholder="Ej. juan@gmail.com"
+required>
+</div>
+
+<div class="grupo">
+<label for="mensaje">¿Qué equipo o refacción necesitas?</label>
+<textarea
+id="mensaje"
+name="mensaje"
+rows="6"
+placeholder="Escribe aquí tu duda o comentario..."
+required></textarea>
+</div>
+
+<button type="submit">
+Enviar Mensaje
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<footer id="contacto">
+
+<h2>Buscanos en nuetras redes sociales </h2>
+
+<div class="redes">
+<a href="https://www.facebook.com/share/17f3FCi6E8/?mibextid=wwXIfr"><img src="C:\Users\shilo\OneDrive\Documentos\Codigo_de_mi_proyecto\images.png"></a>
+<a href="https://www.instagram.com/imper_uni?igsh=MXR1ODd5aTgwZjVqZQ=="><img src="C:\Users\shilo\OneDrive\Documentos\Codigo_de_mi_proyecto\images (6).jpg"></a>
+<a href=""><img src="C:\Users\shilo\OneDrive\Documentos\Codigo_de_mi_proyecto\images (7).jpg"></a>
+</div>
+
+<div class="ubicacion">
+<h3>Numero de telefono</h3>
+<p>5558784569</p>
+<p>5564685854</p>
+</div>
+
+</footer>
+
+<script>
+let indice = 0;
+const slides = document.querySelectorAll(".slide");
+
+function mostrar(n){
+slides.forEach(s=>s.classList.remove("activo"));
+slides[n].classList.add("activo");
+}
+
+document.querySelector(".siguiente").onclick=()=>{
+indice=(indice+1)%slides.length;
+mostrar(indice);
+}
+
+document.querySelector(".anterior").onclick=()=>{
+indice=(indice-1+slides.length)%slides.length;
+mostrar(indice);
+}
+
+setInterval(()=>{
+indice=(indice+1)%slides.length;
+mostrar(indice);
+},3000);
+
+</script>
+
+</body>
+</html>
