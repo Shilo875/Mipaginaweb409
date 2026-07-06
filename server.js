@@ -1,14 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// Definir esquema
+mongoose.connect("mongodb://127.0.0.1:27017/formulario")
+.then(() => console.log("Conectado a MongoDB"))
+.catch(err => console.log("Error MongoDB:", err));
+
 const contactoSchema = new mongoose.Schema({
     nombre: String,
     correo: String,
@@ -18,19 +21,24 @@ const contactoSchema = new mongoose.Schema({
 
 const Contacto = mongoose.model("Contacto", contactoSchema);
 
-// Ruta para guardar datos
 app.post("/guardar", async (req, res) => {
-    const nuevoContacto = new Contacto({
-        nombre: req.body.nombre,
-        correo: req.body.correo,
-        mensaje: req.body.mensaje
-    });
+    console.log("Datos recibidos:", req.body);
 
-    await nuevoContacto.save();
-    res.send("Datos guardados correctamente en MongoDB");
+    try {
+        const nuevoContacto = new Contacto({
+            nombre: req.body.nombre,
+            correo: req.body.correo,
+            mensaje: req.body.mensaje
+        });
+
+        await nuevoContacto.save();
+        res.send("Datos guardados correctamente en MongoDB");
+    } catch (error) {
+        console.log("Error al guardar:", error);
+        res.status(500).send("Error al guardar en MongoDB");
+    }
 });
 
-// Iniciar servidor
 app.listen(3000, () => {
     console.log("Servidor corriendo en http://localhost:3000");
 });

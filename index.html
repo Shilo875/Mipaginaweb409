@@ -608,12 +608,15 @@ document.getElementById("formularioContacto").addEventListener("submit", async f
         body: datos
     });
 
-    await fetch("http://localhost:3000/guardar", {
-        method: "POST",
-        body: new URLSearchParams(datos)
-    });
+  await fetch("http://127.0.0.1:3000/guardar", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: new URLSearchParams(datos)
+});
 
-    alert("Datos guardados en Netlify y MongoDB");
+    alert(" ¡Gracias por contactarnos!\n\nHemos recibido correctamente tus datos.\n\nTomaremos en cuenta tu pedido y nos pondremos en contacto contigo lo antes posible.\n\n¡Gracias por confiar en Refaccionaria Shilo's!");
     form.reset();
 });
 </script>
