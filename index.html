@@ -616,8 +616,11 @@ document.getElementById("formularioContacto").addEventListener("submit", async f
     body: new URLSearchParams(datos)
 });
 
-    alert(" ¡Gracias por contactarnos!\n\nHemos recibido correctamente tus datos.\n\nTomaremos en cuenta tu pedido y nos pondremos en contacto contigo lo antes posible.\n\n¡Gracias por confiar en Refaccionaria Shilo's!");
-    form.reset();
+   console.log("El formulario se envió");
+
+alert("¡Gracias por contactarnos!\n\nHemos recibido correctamente tus datos.\n\nTomaremos en cuenta tu pedido y nos pondremos en contacto contigo lo antes posible.\n\n¡Gracias por confiar en Refaccionaria Shilo's!");
+
+form.reset();
 });
 </script>
 
