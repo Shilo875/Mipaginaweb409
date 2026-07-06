@@ -519,26 +519,26 @@ background:linear-gradient(135deg,#1976d2,#64b5f6);
       <p>Solicita información sobre nuestras refacciones o déjanos un mensaje.</p>
     </div>
 
-    <form onsubmit="alert('Mensaje enviado correctamente'); return false;">
+   <form name="contacto" method="POST" data-netlify="true">
+    <input type="hidden" name="form-name" value="contacto">
 
-      <div class="grupo">
+    <div class="grupo">
         <label for="nombre">Nombre completo</label>
         <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" required>
-      </div>
+    </div>
 
-      <div class="grupo">
+    <div class="grupo">
         <label for="correo">Correo electrónico</label>
         <input type="email" id="correo" name="correo" placeholder="Ej. juan@gmail.com" required>
-      </div>
+    </div>
 
-      <div class="grupo">
+    <div class="grupo">
         <label for="mensaje">¿Qué equipo o refacción necesitas?</label>
         <textarea id="mensaje" name="mensaje" rows="6" placeholder="Escribe aquí tu duda o comentario..." required></textarea>
-      </div>
+    </div>
 
-      <button type="submit">Enviar Mensaje</button>
-
-    </form>
+    <button type="submit">Enviar Mensaje</button>
+</form>
   </div>
 </section>
 
