@@ -519,7 +519,7 @@ background:linear-gradient(135deg,#1976d2,#64b5f6);
       <p>Solicita información sobre nuestras refacciones o déjanos un mensaje.</p>
     </div>
 
-   <form name="contacto" method="POST" data-netlify="true">
+   <form name="contacto" id="formularioContacto" method="POST" data-netlify="true">
     <input type="hidden" name="form-name" value="contacto">
 
     <div class="grupo">
@@ -594,6 +594,28 @@ indice=(indice+1)%slides.length;
 mostrar(indice);
 },3000);
 
+</script>
+
+<script>
+document.getElementById("formularioContacto").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const form = e.target;
+    const datos = new FormData(form);
+
+    await fetch("/", {
+        method: "POST",
+        body: datos
+    });
+
+    await fetch("http://localhost:3000/guardar", {
+        method: "POST",
+        body: new URLSearchParams(datos)
+    });
+
+    alert("Datos guardados en Netlify y MongoDB");
+    form.reset();
+});
 </script>
 
 </body>

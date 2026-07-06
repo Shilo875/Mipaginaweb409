@@ -1,12 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
 
-// Conexión a MongoDB local
-mongoose.connect('mongodb://localhost:27017/formulario');
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Definir esquema
 const contactoSchema = new mongoose.Schema({
